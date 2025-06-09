@@ -193,7 +193,7 @@ struct adl_info<Min, Max> {
 
 template<bool IsFlags>
 struct adl_info<IsFlags> {
-    static constexpr int is_flags = IsFlags;
+    static constexpr bool is_flags = IsFlags;
 };
 
 // Enum value must be in range [MAGIC_ENUM_RANGE_MIN, MAGIC_ENUM_RANGE_MAX]. By default MAGIC_ENUM_RANGE_MIN = -128, MAGIC_ENUM_RANGE_MAX = 127.
