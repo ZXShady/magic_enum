@@ -512,12 +512,15 @@ constexpr bool enum_flags_contains(string_view value, BinaryPredicate p) noexcep
   magic_enum::enum_flags_test_any(Left|Down|Right, Down|Right); // -> "true"
   ```
 
-* Or, for enum types that are deeply nested in classes and/or namespaces, declare a function called `my_adl_info_struct adl_magic_enum_define_range(my_enum_type)` in the same namespace as `my_enum_type`, which magic_enum will find by ADL lookup, and whose return type is a struct with static data members containing the same parameters as `magic_enum::customize::enum_range<my_enum_type>`
+* Or, for enum types that are deeply nested in classes and/or namespaces, declare a function called `my_adl_info_struct adl_magic_enum_define_range(my_enum_type)` in the same namespace as `my_enum_type`, which magic_enum will find by ADL (because the function is in the same class/namespace as `my_enum_type`), and whose return type is a struct with `static constexpr` data members containing the same parameters as `magic_enum::customize::enum_range<my_enum_type>`
   ```cpp
   namespace Deeply::Nested::Namespace {
   enum class my_enum_type { ... };
   struct my_adl_info_struct {
     static constexpr bool is_flags = true;
+    // you can also set min and max here (see Limitations document)
+    // static constexpr int min = ...;
+    // static constexpr int max = ...;
   };
   // - magic_enum will find this function by ADL
   // - no need to ever define this function
