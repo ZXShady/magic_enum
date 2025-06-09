@@ -529,7 +529,7 @@ constexpr bool enum_flags_contains(string_view value, BinaryPredicate p) noexcep
   ```
 
 * As a shorthand, if you only want to set `is_flags` and not `min` or `max`, you can also use `magic_enum::customize::adl_info<is_flags_bool>` to avoid having to define `my_adl_info_struct` in your code:
-```cpp
+  ```cpp
   namespace Deeply::Nested::Namespace {
   enum class my_enum_type { ... };
   // - magic_enum will find this function by ADL
